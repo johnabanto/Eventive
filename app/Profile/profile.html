@@ -1,0 +1,73 @@
+<div ui-view></div>
+
+<style>
+	body {
+		background-image: url("../app/styles/pictures/laptop1.jpg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		background-position: center;
+	}
+	@media screen and (max-width: 991px) {
+		body{
+			background-image: url("../app/styles/pictures/lvlaptop.jpeg");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+			background-position: center;	
+		}
+	}
+</style>
+
+<div class="container" id="loginBox">
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2>{{vm.name}}'s Page</h2>
+				<div class="panel-body">
+					<div class="row">
+						<!-- profile picture image box -->
+						<div class="col-md-6" id="picbox">	
+							<form id="form1">
+								<input type='file' accept="image/*" />
+								<img id="myImg" src="#" alt="your image" />
+							</form>
+						</div>
+
+									<!-- profile information box -->
+						<div class="col-md-6">
+							<ul id="prof_info">
+								<li><p>Name: {{vm.name}}</p></li>
+								<li><p>Email: {{vm.email}}</p></li>
+								<li><p>Phone Number: {{vm.number}}</p></li>
+								<!-- edit profile button -->
+								<button type="button" class="btn btn-default" style="float: right">Edit Information</button>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- upcoming events list -->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12" id="pevents_box">
+							<tr>
+								<th><b>Upcoming Events</b></th>
+							</tr>
+							<table class="table" id="pevents_table">
+					
+								<!-- upcoming events to be setup in ng-repeat to populte events -->
+								<tr ng-repeat="event in vm.events">
+									<td>{{event.eventname}}</td>
+									<!-- remove upcoming event button -->
+									<td><button type="button" class="btn btn-default" style="float: right" ng-click="vm.removeEvent(event._id)">Remove Event</button></td>
+								</tr>
+							</table>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

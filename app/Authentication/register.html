@@ -1,0 +1,52 @@
+<div ui-view></div>
+
+<style>
+	body {
+		background-image: url("../app/styles/pictures/laptop2.jpg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		background-position: center;
+	}
+	@media screen and (max-width: 991px) {
+		body{
+			background-image: url("../app/styles/pictures/lvlaptop.jpeg");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;	
+			background-position: center;
+		}
+	}
+</style>
+
+<div class="container" id="registerBox">
+	<div class="panel-group">
+		<div class="panel panel-default animated fadeIn">
+			<div class="panel-heading">
+				<div class="panel-body" id="regPanel">
+					<form name="userForm" ng-submit="submitForm()"> 
+						<!-- Registration page for new users -->
+						<!-- NAME -->
+						<h4><b>Full Name</b></h4>
+						<input type="text" class="form-control" placeholder="Enter Full Name" ng-model="vm.name" required><br>
+
+						<!-- PASSWORD -->
+						<h4><b>Password</b></h4>
+						<input type="input" class="form-control" placeholder="Enter Password" ng-model="vm.password" required><br>
+
+						<!-- EMAIL -->
+						<h4><b>Email</b></h4>
+						<input type="email" class="form-control" placeholder="Enter Email" ng-model="vm.email" id="email" required><br>
+						
+						<!-- PHONE NUMBER -->
+						<h4><b>Phone Number</b></h4>
+						<input type="tel" class="form-control" placeholder="Enter Phone Number" ng-model="vm.number" required><br>
+			
+						<!-- Submit button to go to profile page -->
+						<button type="button" class="btn btn-info btn-lg" ng-click="vm.register()" id="regBtn">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

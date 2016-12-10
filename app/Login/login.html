@@ -1,0 +1,29 @@
+<div ui-view></div>
+
+<div class="container" id="login_box">
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h1>Login</h1>
+				<div class="panel-body">
+					<form>
+						<div class="form-group">
+
+							<!-- Input fields for user name and password -->
+							<label>User Name</label>
+							<input type="input" class="form-control" placeholder="Enter Name"><br>
+							<label>Password</label>
+							<input type="input" class="form-control" placeholder="Enter Password"><br>
+
+							<!-- Login button to go to profile page -->
+							<button type="button" class="btn btn-default">Login</button><br>
+
+							<!-- Link to register page if not member -->
+							<p>Not a member <a ui-sref="register">sign up!</a></p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
