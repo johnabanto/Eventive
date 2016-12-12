@@ -10,6 +10,7 @@ var ctrlProfile = require('../controllers/profile');
 var ctrlAuth = require('../controllers/authentication');
 var ctrlEvent = require('../controllers/allevents');
 var ctrlMessages = require('../controllers/messanger');
+var ctrlFiles = require('../controllers/filer');
 
 router.get('/', function (req, res){
 	res.json({message: 'The server is working!'});
@@ -37,5 +38,9 @@ router.delete('/events/:event_id', auth, ctrlEvent.deleteEvent); // only for org
 // messages
 router.get('/messages', ctrlMessages.testTwilio);
 router.post('/messages/:event_id', auth, ctrlMessages.sendGroupMessages);
+
+// files
+router.post('/files', ctrlFiles.postFile);
+router.get('/files/:userId', ctrlFiles.read);
 
 module.exports = router;

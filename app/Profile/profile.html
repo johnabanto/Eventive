@@ -20,54 +20,54 @@
 </style>
 
 <div class="container" id="loginBox">
-	<div class="panel-group">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h2>{{vm.name}}'s Page</h2>
-				<div class="panel-body">
-					<div class="row">
+	<div class="container">
+		<div class="row row-flex row-flex-wrap">
+			<div class="col-md-6">
+				<div class="well clearfix">
+					<h2><label id="profileName">{{vm.name}}'s</label> Page</h2>
 						<!-- profile picture image box -->
-						<div class="col-md-6" id="picbox">	
-							<form id="form1">
-								<input type='file' accept="image/*" />
-								<img id="myImg" src="#" alt="your image" />
-							</form>
-						</div>
-
-									<!-- profile information box -->
-						<div class="col-md-6">
-							<ul id="prof_info">
-								<li><p>Name: {{vm.name}}</p></li>
-								<li><p>Email: {{vm.email}}</p></li>
-								<li><p>Phone Number: {{vm.number}}</p></li>
-								<!-- edit profile button -->
-								<button type="button" class="btn btn-default" style="float: right">Edit Information</button>
-							</ul>
-						</div>
-					</div>
+					<form id="form1">
+						<input type='file' accept="image/*" />
+						<img id="myImg" src="#" alt="your image" />
+					</form>
 				</div>
+			</div>
 
-				<!-- upcoming events list -->
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-md-12" id="pevents_box">
-							<tr>
-								<th><b>Upcoming Events</b></th>
-							</tr>
-							<table class="table" id="pevents_table">
+			<!-- profile information box -->
+			<div class="col-md-6">
+				<div class="well clearfix">
+					<ul id="prof_info">
+						<li><p><label class="headings">NAME:</label> {{vm.name}}</p></li>
+						<li><p><label class="headings">EMAIL:</label> {{vm.email}}</p></li>
+						<li><p><label class="headings">PHONE NUMBER:</label> {{vm.number}}</p></li>
+						<!-- edit profile button -->
+						<button type="button" class="btn btn-info" id="proBtn" style="float: right">Edit Information</button>
+					</ul>
+				</div>
+			</div>
 					
-								<!-- upcoming events to be setup in ng-repeat to populte events -->
-								<tr ng-repeat="event in vm.events">
-									<td>{{event.eventname}}</td>
-									<!-- remove upcoming event button -->
-									<td><button type="button" class="btn btn-default" style="float: right" ng-click="vm.removeEvent(event._id)">Remove Event</button></td>
-								</tr>
-							</table>
-							
-						</div>
-					</div>
+			<!-- upcoming events list -->
+			<div class="col-md-12">
+				<div class="well">
+					<table class="table" id="pevents_table">
+						<thead><label class="headings">UPCOMING EVENTS</label></thead>
+						<tr class="border_bottom">
+							<th>NAME</th>
+							<th>ADDRESS</th>
+							<th>DATE</th>
+							<th>UPDATE</th>
+						</tr>
+						<!-- upcoming events to be setup in ng-repeat to populte events -->
+						<tr ng-repeat="event in vm.events">
+							<td>{{event.eventname}}</td>
+							<td>{{event.address}}</td>
+							<td>{{event.datetime | date:'EEEE, MMMM d, y h:mm a' }}</td>
+							<!-- remove upcoming event button -->
+							<td><button type="button" class="btn btn-info" id="btn-sm" style="float: right" ng-click="vm.removeEvent(event._id)">Remove Event</button></td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	</div> <!-- closes container -->
+</div> <!-- closes container loginBox -->

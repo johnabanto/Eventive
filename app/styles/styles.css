@@ -2,16 +2,13 @@
 
 /*global styling starts*/
 	.panel-default {
-		box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+		box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.7);
 	}
 	.fadeIn {
 		-vendor-animation-duration: 3s;
 		-vendor-animation-delay: 2s;
 	}
-	* {
-		box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
-	}
-/*nav bar to dropdown styling*/
+	/*nav bar to dropdown styling*/
 	body {
 		margin: 0;
 		padding: 0;
@@ -43,7 +40,7 @@
 	nav ul li {
 		display: inline-block;
 		padding: 20px 0 20px 2px;
-		margin-top: 8px;
+		margin-top: 15px;
 		margin-left: 0px;
 	}
 	section {
@@ -75,7 +72,7 @@
 			background: #f6a2ef;
 			box-sizing: border-box;
 			width: 100%;
-			padding: 10px;
+			padding: 5px;
 			text-align: right;
 			color: white;
 			opacity: 0.9;
@@ -101,6 +98,20 @@
 
 
 /*home screen styling starts*/
+	.eventive {
+		color: #5bc0de;
+		font-size: 30px;
+	}
+	#homeText {
+		width: 100px;
+		max-width: 90%;
+		border: none;
+		text-align: center;
+	}
+	#screenText {
+		font-size: 200px;
+		color: #ee61e2 ;
+	}
 /*home screen styling ends*/
 
 
@@ -124,8 +135,9 @@
 	#btn:active,
 	#btn:hover {
 		background-color: none !important;
-		color: #ee61e2 !important;
+		border-color: #ee61e2 !important;
 		font-weight: bold;
+		border-bottom: 15px solid;
 	}
 	#logo {
 		width:200px;
@@ -145,6 +157,98 @@
 /*top navigation bar styling ends*/
 
 
+/*about us page styling starts*/
+	/* Slideshow container */
+	.slideshow-container {
+		max-width: 1000px;
+		max-height: 500px;
+		position: relative;
+		margin: auto;
+		padding: 5%;
+	}
+
+	/* Next & previous buttons */
+	.prev, .next {
+		cursor: pointer;
+		position: absolute;
+		top: 50%;
+		width: auto;
+		margin-top: -22px;
+		padding: 16px;
+		color: white;
+		font-weight: bold;
+		font-size: 18px;
+		/*  transition: 0.6s ease;*/
+		border-radius: 0 3px 3px 0;
+	}
+
+	/* Position the "next button" to the right */
+	.next {
+		right: 0;
+		border-radius: 3px 0 0 3px;
+	}
+
+	/* On hover, add a black background color with a little bit see-through */
+	.prev:hover, .next:hover {
+		background-color: rgba(0,0,0,0.8);
+	}
+
+	/* Caption text */
+	.text {
+		color: #f2f2f2;
+		font-size: 15px;
+		padding: 8px 12px;
+		position: absolute;
+		bottom: 8px;
+		width: 100%;
+		text-align: center;
+	}
+
+	/* Number text (1/3 etc) */
+	.numbertext {
+		color: #f2f2f2;
+		font-size: 12px;
+		padding: 8px 12px;
+		position: absolute;
+		top: 0;
+	}
+
+	/* The dots/bullets/indicators */
+	.dot {
+		cursor:pointer;
+		height: 13px;
+		width: 13px;
+		margin: 0 2px;
+		background-color: #bbb;
+		border-radius: 50%;
+		display: inline-block;
+		transition: background-color 0.6s ease;
+	}
+
+	.active, .dot:hover {
+		background-color: #717171;
+	}
+
+	/* Fading animation */
+	.fade {
+		-webkit-animation-name: fade;
+		-webkit-animation-duration: 1.5s;
+		animation-name: fade;
+		animation-duration: 1.5s;
+	}
+
+	@-webkit-keyframes fade {
+		from {opacity: .5} 
+		to {opacity: 1}
+	}
+
+	@keyframes fade {
+		from {opacity: .5} 
+		to {opacity: 1}
+	}
+/*about us page styling ends*/
+
+
 /*upcoming evnts page styling starts*/
 	#ueventsPanel {
 		margin-bottom: 20px;
@@ -152,7 +256,7 @@
 	#ueventsContainer {
 		width: 1000px;
 		max-width: 90%;
-		padding: 2% 5%;
+		padding: 1% 5%;
 	}
 	#uevents_box {
 		text-align: left;
@@ -178,28 +282,26 @@
 	#googlemap {
 		margin-top: 15px;
 		margin-bottom: 15px;
-		border: 1px solid black;
+		border: 1px;
 		padding: 1px;
-		background-color: #ee61e2;
 	}
 	#mapBtn {
-		box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+		box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);
 		font-size: 150%;
 		width: 400px;
 		max-width: 90%;
-
 	}
 /*upcomign events page styling ends*/
 
 
 /*login page styling starts*/
 	#loginContainer {
-		padding-top: 10%;
+		padding-top: 2%;
 		width: 800px;
 		max-width: 90%;
 	}
 	#loginBtn {
-		box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+		box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);
 		width: 150px;
 	}
 	#signUpLink {
@@ -208,12 +310,15 @@
 		font-size: 30px;
 	}
 	#signUpLink:hover {
-		font-size: 150%;
+		font-size: 125%;
 		transition-duration: : 0.2s;
 	}
 	#login,
 	#password {
 		width: 100%;
+	}
+	#loginText {
+		font-size: 40px;
 	}
 /*login page styling ends*/
 
@@ -222,12 +327,16 @@
 	#proInfo {
 		list-style-type: none;
 	}
+	.headings {
+		font-weight: bold;
+		font-size: 20px;	}
 	#pevents_table {
 		width: 100%;
+		max-width: 90%
 		border-collapse: collapse;
 	}
-	#pevents_table td:hover {
-		background-color: #ee61e2;
+	#pevents_table tr {
+		border: 10px;
 	}
 	#profile_body {
 		align-content: center;
@@ -236,10 +345,35 @@
 		color: #ee61e2;
 	}
 	.well {
-		box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+		box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);
 	}
 	#loginBox {
 		padding-top: 3%;
+	}
+	#profileName {
+		color: #ee61e2;
+		font-weight: bold;
+	}
+	#btn-sm {
+		width: 100%;
+		margin: 1px;
+		box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+	}
+	#proBtn {
+		margin: 1px;
+		box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);		
+	}
+	#eventBtn1 {
+		box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);
+		font-size: 125%;
+		width: 200px;
+		max-width: 90%;
+	}
+	#eventBtn2 {
+		box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);
+		font-size: 125%;
+		width: 200px;
+		max-width: 90%;
 	}
 /*profile page styling ends*/
 
@@ -256,7 +390,6 @@
 		border: 1px solid #333;
 		margin: 0;
 		font-family: inherit;
-		font-size
 		-webkit-appearance: none;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
@@ -272,10 +405,11 @@
 	}
 	#registerBox {
 		width: 800px;
-		padding-top: 10%;
+		padding-top: 2%;
 	}
 	#regBtn {
-		box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+		box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);
+		width: 150px;
 	}
 	#regPanel {
 		padding: 50px;
@@ -284,14 +418,15 @@
 
 
 /* footer navbar styling starts*/
+	/*navigation bar at footer*/
 	#navbar_bot {
 		height: 100px;
 		background-color: white;
 		max-height: 80px;
 	}
+	/*trademark logo*/
 	h5 {
 		padding-top: 35px;
 		text-align: center;
 	}
-/* footer navbar styling ends*/
-
+/* footer navbar styling ends

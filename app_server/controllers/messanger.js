@@ -7,7 +7,7 @@ module.exports.testTwilio = function (req, res) {
 	client.sendMessage({
 		to:'+16613001234', // Any number Twilio can deliver to
     	from: '+16193040115', // A number you bought from Twilio and can use for outbound communication
-    	body: 'I like turtles' // body of the SMS message
+    	body: 'This is a test' // body of the SMS message
 	}, 
 	function(err, response) {
 		if(err) res.send(err);
@@ -20,13 +20,13 @@ module.exports.testTwilio = function (req, res) {
 }
 
 module.exports.sendGroupMessages = function(req, res) {
-	var count;
-	req.body.attendees.forEach(function(attendee) {
+	var len = req.body.attendees.length;
+	for(var i = 0; i < len; i++) {
 		client.sendMessage({
-			to:'+1' + attendee.attendeenumber, // Any number Twilio can deliver to
-    		from: '+16193040115', // A number you bought from Twilio and can use for outbound communication
-    		body: "Hi! " + attendee.attendeename // body of the SMS message
+			to: '+16613001234',//'+1' + req.body.attendees[i].attendeenumber,
+			from: '+16193040115',
+			body: 'Hi ' + req.body.attendees[i].attendeename + "! Thank you for checking into " + req.body.eventName + ". We hope you have a wonderful time."
 		});
-	}, count++);
-	res.status(200).json({"Messages Send": count});
+	}
+	res.status(200).json({"Events": "Have been sent"});
 }

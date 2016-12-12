@@ -29,7 +29,7 @@
 						<div class="form-group">
 						<div class="col-md-6 col-md-offset-1">
 							<!-- Input fields for user name and password -->
-							<h2><b>Login</b></h2>
+							<h2 id="loginText"><b>Login</b></h2>
 							<input type="input" class="form-control" placeholder="Enter Email" ng-model="vm.email" id="login" required><br>
 
 							<input type="password" class="form-control" placeholder="Enter Password" ng-model="vm.password" id="password" required><br>
@@ -40,7 +40,7 @@
 					<aside>
 							<div class="col-md-4 col-md-offset-2">
 								<!-- Link to register page if not member -->
-								<h2 draggable="true"><b>Not a member</b> <a ui-sref="register" id="signUpLink">sign up!</a></h2>
+								<h2 id="loginText"><b>Not a member</b> <a ui-sref="register" id="signUpLink">sign up!</a></h2>
 							</div>
 					</aside>
 						</div>

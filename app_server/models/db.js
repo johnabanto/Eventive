@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Grid = require('gridfs-stream');
 mongoose.Promise = global.Promise;
 var gracefulShutdown;
 var dbURI = 'mongodb://admin:pass1@ds115738.mlab.com:15738/wineandpaint';
@@ -8,8 +9,13 @@ if (process.env.NODE_ENV === 'production') {
 }
 */
 console.log(dbURI);
+Grid.mongo = mongoose.mongo;
 mongoose.connect(dbURI);
 
+// add grid-fs to mongoose
+mongoose.connection.once('open', function() {
+	var gfs = Grid(mongoose.connection.db);
+});
 // Connection events
 mongoose.connection.on('connected', function() {
 	console.log('Mongoose connected to ' + dbURI);
@@ -20,6 +26,7 @@ mongoose.connection.on('error', function(err) {
 mongoose.connection.on('disconnected', function() {
 	console.log('Mongoose disconnected');
 });
+
 
 
 // capture app termination and restart the server
@@ -51,4 +58,4 @@ process.on('SIGTERM', function() {
 // bring in schemas & models
 require('./users');
 require('./events');
-require('./messages')
+require('./messages');
