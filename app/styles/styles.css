@@ -52,7 +52,7 @@
 	.handle {
 		width: 100%;
 		height: 30px;
-		background: #ee61e2; /*#ee61e2 = hotpink, #f6a2ef = lightpink, #73eaf5 = neon blue*/
+		background: #ee61e2; /*#ee61e2 = hotpink, #f6a2ef = lightpink, #5bc0de = neon blue*/
 		text-align: right;
 		font-weight: bold;
 		box-sizing: border-box;
@@ -120,7 +120,6 @@
 		padding: 10px;
 	}
 	#navbar_top {
-		padding: 0;
 		height: 100px;
 		background-color: white;
 		max-height: 80px;
@@ -246,21 +245,20 @@
 		from {opacity: .5} 
 		to {opacity: 1}
 	}
+
 /*about us page styling ends*/
 
 
 /*upcoming evnts page styling starts*/
-	#ueventsPanel {
-		margin-bottom: 20px;
-	}
 	#ueventsContainer {
 		width: 1000px;
 		max-width: 90%;
-		padding: 1% 5%;
+		padding: 1% 0;
 	}
 	#uevents_box {
 		text-align: left;
-		width: 300px;
+		width: 600px;
+		max-width: 90%;
 		height: 100%;
 		max-height: 250px;
 		padding: 10px;
@@ -280,16 +278,61 @@
 		width: 300px;
 	}
 	#googlemap {
-		margin-top: 15px;
-		margin-bottom: 15px;
+		margin: 10px 0;
 		border: 1px;
 		padding: 1px;
 	}
 	#mapBtn {
 		box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);
 		font-size: 150%;
-		width: 400px;
+		width:200px;
 		max-width: 90%;
+		float:right;
+	}
+	.angular-google-map-container { 
+		height: 400px; 
+	}
+	/*parallax scrolling*/
+	.bgimg-1, .bgimg-2, .bgimg-3, .bgimg-4 {
+		position: relative;
+		opacity: 0.7;
+		background-attachment: fixed;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		min-height: 400px;
+	}
+	.bgimg-1 {
+		background-image: url("../app/styles/pictures/Eventive4.jpeg");
+		min-height: 440px;
+	}
+	.bgimg-2 {
+		background-image: url("../app/styles/pictures/girl2.jpg");
+		min-height: 440px;
+	}
+	.bgimg-3 {
+		background-image: url("../app/styles/pictures/girl3.jpeg");
+		min-height: 440px;
+	}
+	.bgimg-4 {
+		background-image: url("../app/styles/pictures/girl3.jpeg");
+		min-height: 100%;
+	}
+	.caption {
+		position: absolute;
+		left: 0;
+		top: 50%;
+		width: 100%;
+		text-align: center;
+		color: #000;
+	}
+	.caption span.border {
+		background-color: #111;
+		color: #fff;
+		padding: 18px;
+		font-size: 25px;
+		letter-spacing: 10px;
+		text-align: center;
 	}
 /*upcomign events page styling ends*/
 
@@ -319,6 +362,8 @@
 	}
 	#loginText {
 		font-size: 40px;
+		color:black;
+		text-align: left;
 	}
 /*login page styling ends*/
 
@@ -359,21 +404,32 @@
 		margin: 1px;
 		box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 	}
+	#editBtn {
+		width: 150px;
+		margin: 1px;
+		box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+	}
 	#proBtn {
 		margin: 1px;
 		box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);		
 	}
 	#eventBtn1 {
 		box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);
-		font-size: 125%;
-		width: 200px;
+
+		width: 150px;
 		max-width: 90%;
 	}
 	#eventBtn2 {
 		box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);
-		font-size: 125%;
-		width: 200px;
+		width: 150px;
 		max-width: 90%;
+	}
+	#eventInput {
+		height: ;
+	}
+	h2 {
+		color: #ee61e2;
+		text-align: center;
 	}
 /*profile page styling ends*/
 

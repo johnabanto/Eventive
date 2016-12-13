@@ -64,3 +64,40 @@ module.exports.read = function(req, res) {
         */
 	});
 }
+
+module.exports.noImg = function(req, res) {
+
+	gfs.files.find({ 'metadata.userId' : "0" }).toArray(function (err, files) {
+ 
+ 	    if(files.length===0){
+			return res.status(400).send({
+				message: 'File not found'
+			});
+ 	    }
+		
+		res.writeHead(200, {'Content-Type': files[0].contentType});
+		
+		var readstream = gfs.createReadStream({
+			  filename: files[0].filename
+		});
+ 
+	    readstream.on('data', function(data) {
+	        res.write(data);
+	    });
+	    
+	    readstream.on('end', function() {
+	        res.end();        
+	    });
+ 
+		readstream.on('error', function (err) {
+		  console.log('An error occurred!', err);
+		  throw err;
+		});
+		
+		/* grab only files not the data binded to it
+		if (err)
+            res.send(err);
+        res.json(files);
+        */
+	});
+}

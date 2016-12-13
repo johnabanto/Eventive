@@ -6,7 +6,8 @@
             'toastr', 
             'LocalStorageModule', 
             'uiGmapgoogle-maps',
-            'ui.bootstrap.datetimepicker'
+            'ui.bootstrap.datetimepicker',
+            'ngFileUpload'
         ]);
 
         app.value ('wineServer', 'https://appventful.herokuapp.com/api/');

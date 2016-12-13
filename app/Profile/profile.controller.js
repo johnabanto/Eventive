@@ -5,10 +5,10 @@
         .module('app')
         .controller('profileController', profileController);
 
-    profileController.$inject = ['toastr', 'storageFactory', 'EventsFactory', '$state', '$stateParams'];
+    profileController.$inject = ['toastr', 'storageFactory', 'EventsFactory', '$state', '$stateParams', 'imageFactory', 'Upload', '$scope', 'wineServer'];
     
     /* @ngInject */
-    function profileController(toastr, storageFactory, EventsFactory, $state, $stateParams) {
+    function profileController(toastr, storageFactory, EventsFactory, $state, $stateParams, imageFactory, Upload, $scope, wineServer) {
         var vm = this;
         vm.title = 'profileController';
  
@@ -31,7 +31,17 @@
                 },
                 function(error) {
                     toastr.error("Something went wrong in the profile controller.")
+                });
+            /*
+            imageFactory.getImage(vm.id).then(
+                function(response) {
+                    console.log(vm.pic)
+                    vm.pic = response;
+                },
+                function(error) {
+                    toastr.error("There was an error getting your profile picture.")
                 })
+            */
         }
 
         vm.removeEvent = function(eventId) {
@@ -44,6 +54,21 @@
                     toastr.error("Problem removing user from event");
                 });
         }
+
+        $scope.upload= function(file, userId) {
+            Upload.upload({
+                url: wineServer + 'files',
+                data: {"filefield": file, "userId": userId}
+            }).then(function(response) {
+                console.log(response);
+                $state.reload();
+            },
+            function(error) {
+                toastr.error("Problem uploading photo")
+            })
+        }
+
+        
     }
 
 })();

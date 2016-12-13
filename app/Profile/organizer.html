@@ -34,12 +34,13 @@
 			<!-- profile information -->
 			<div class="col-md-6">
 				<div class="well clearfix">
+					<h2>PROFILE INFORMATION</h2>
 					<ul id="proInfo">
 						<li><p><label class="headings">NAME:</label> {{vm.name}}</p></li>
 						<li><p><label class="headings">EMAIL:</label> {{vm.email}}</p></li>
 						<li><p><label class="headings">PHONE NUMBER:</label> {{vm.number}}</p></li>
 						<!-- edit profile button -->
-						<button type="button" class="btn btn-default" style="float: right">Edit</button>
+						<button type="button" class="btn btn-info" id="editBtn" style="float: right">Edit</button>
 					</ul>
 				</div>
 			</div>
@@ -47,7 +48,7 @@
 			<div class="col-md-12">
 				<div class="well clearfix">
 					<table class="table" id="pevents_table">
-						<thead><label class="headings">UPCOMING EVENTS</label></thead>
+						<thead><h2 style="text-align: left">UPCOMING EVENTS</label></thead>
 						<tr>
 							<th>NAME</th>
 							<th>ADDRESS</th>
@@ -75,9 +76,10 @@
 				</div>
 			</div> <!-- closes upcoming events box --> 
 
-			<div class="col-md-12">
-				<div class="well">
+			<div class="col-md-6" id="eventInput">
+				<div class="well clearfix">
 					<div class="form-group">
+						<h2>CREATE AN EVENT</h2>
 						<label class="headings">EVENT NAME</label>
 						<span><input type="text" placeholder="Enter event name" ng-model="vm.eventName"></input></span>
 					</div>
@@ -87,18 +89,26 @@
 						<input type="text" placeholder="Add an address" ng-model="vm.address">
 					</div>
 
+					<div>
+						<button ng-click="vm.postNewEvent(vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description)" class="btn btn-info" id="eventBtn1">Submit New Event</button>
+						<button ng-click="vm.editEvent(vm.eventId, vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description)" class="btn btn-info" id="eventBtn2">Edit Event</button>
+					</div>
+				</div>
+			</div>
+				
+			<div class="col-md-6">
+				<div class="well clearfix">
 					<div class="form-group">
+						<h2>SELECT WHEN AND WHERE</h2>
 						<label class="headings">DATE AND TIME</label>
 						<datetimepicker data-ng-model="vm.date" class="col-md-6" id="date"></datetimepicker>
 						<p>Selected Date: {{ vm.date | date:'EEEE, MMMM d, y h:mm a' }}</p>
 						<label class="headings">DETAILS</label>
 						<input type="text" placeholder="Add a description for the event" ng-model="vm.description">
 					</div>
+				</div>
+			</div>
 
-					<div>
-						<button ng-click="vm.postNewEvent(vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description)" class="btn btn-info" id="eventBtn1">Submit New Event</button>
-						<button ng-click="vm.editEvent(vm.eventId, vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description)" class="btn btn-info" id="eventBtn2">Edit Event</button>
-					</div>
 				</div>
 			</div>
 		</div> <!-- /row -->

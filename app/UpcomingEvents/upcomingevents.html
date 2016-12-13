@@ -1,4 +1,4 @@
-<div ui-view></div>
+<div ui-view ng-cloak></div>
 
 <style>
 	body {
@@ -17,47 +17,63 @@
 			background-position: center;	
 		}
 	}
-	.angular-google-map-container { height: 300px; }
 </style>
 
-<div class="container" id="ueventsContainer">
-	<div class="panel-group">
-		<div class="panel panel-default animated fadeIn" ng-repeat="event in vm.events" id="ueventsPanel">
-			<div class="panel-body">
-				<div class="form-group">
+<div style="position:relative;">
+	<div style="background-color:#282E34;text-align:center;padding:50px 80px;">
+		<span class="eventive" style="text-align:center;letter-spacing: 10px;">MAP</span>
+	</div>
+</div>
+
+<!-- google map view -->	
+<div class="animated fadeIn" id="googlemap">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="well clearfix">
+			<ui-gmap-google-map center='vm.map.center' 
+										zoom='vm.map.zoom'
+										dragging='false'
+										>
+				<div ng-repeat="event in vm.events">					
+					<ui-gmap-marker coords='{ latitude: event.lat, longitude: event.long}' idKey='event._id' options='{clickable: ture}'>
+						<ui-gmap-window 
+							show='false'
+							isIconVisibleOnClick='true'>
+							<p>{{event.eventname}}: {{event.address}}</p>
+						</ui-gmap-window>
+					</ui-gmap-marker>
+				</div>	
+			</ui-gmap-google-map>
+		</div>
+	</div>
+</div>
+
+<div class="bgimg-2">
+	<div class="caption">
+		<span class="border" style="background-color:transparent;"></span>
+	</div>
+</div>
+
+<div style="position:relative;">
+	<div style="color:black;background-color:#282E34;text-align:center;padding:50px 80px;text-align:justify;">
+	    <div class="container" id="ueventsContainer">
+			<div class="container">
+				<div class="row row-flex row-flex-wrap animated fadeIn" ng-repeat="event in vm.events">
 					<!-- panel of upcoming events for people to see -->
-					<section>
-					<div class="col-md-5">
-						<h3 id="eventTitle">{{event.eventname}}</h3>
-						<ul id="uevents_box">
-							<li><p><b>Company Name:</b> {{event.companyname}}</p></li>
-							<li><p><b>Address:</b> {{event.address}}</p></li>
-							<li><p><b>Date:</b> {{event.datetime | date : "medium"}}</p></li>
-							<li><p><b>Description:</b> {{event.description}}</p></li>
-						</ul>
-						<!-- edit profile button -->
-						<button type="button" class="btn btn-info btn-lg btn-block" ng-click="vm.addToEvent(event._id)" id="mapBtn">Sign Up Now!</button>
-					</section>
-						<!-- google map view -->
-					<aside>
-						<div class="col-md-6 col-md-offset-2" id="googlemap">
-							<ui-gmap-google-map center='vm.map.center' 
-												zoom='vm.map.zoom'
-												dragging='false'
-												>
-								<ui-gmap-marker coords='{ latitude: event.lat, longitude: event.long}' idKey='event._id' options='{clickable: ture}'>
-									<ui-gmap-window 
-											show='false'
-											isIconVisibleOnClick='true'>
-										<p>{{event.eventname}}: {{event.address}}</p>
-									</ui-gmap-window>
-								</ui-gmap-marker>
-							</ui-gmap-google-map>
+					<div class="col-md-10 col-md-offset-0">
+						<div class="well clearfix">
+							<h3 id="eventTitle">{{event.eventname}}</h3>
+							<button type="button" class="btn btn-info btn-lg btn-block" ng-click="vm.addToEvent(event._id)" id="mapBtn">Sign Up Now!</button>
+								<ul id="uevents_box">
+									<li><p><b>Company Name:</b> {{event.companyname}}</p></li>
+									<li><p><b>Address:</b> {{event.address}}</p></li>
+									<li><p><b>Date:</b> {{event.datetime | date : "medium"}}</p></li>
+									<li><p><b>Description:</b> {{event.description}}</p></li>
+								</ul>
+							<!-- edit profile button -->
 						</div>
-					</aside>
 					</div>
 				</div>
-			</div>
-		</div>
+			</div> <!--  closes containter -->
+		</div> <!-- closes ueventsContainer -->
 	</div>
 </div>

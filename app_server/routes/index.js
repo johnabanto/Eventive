@@ -42,5 +42,6 @@ router.post('/messages/:event_id', auth, ctrlMessages.sendGroupMessages);
 // files
 router.post('/files', ctrlFiles.postFile);
 router.get('/files/:userId', ctrlFiles.read);
+router.get('/files', ctrlFiles.noImg);
 
 module.exports = router;
