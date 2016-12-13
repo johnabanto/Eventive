@@ -160,7 +160,7 @@
 	/* Slideshow container */
 	.slideshow-container {
 		max-width: 1000px;
-		max-height: 500px;
+		max-height: 400px;
 		position: relative;
 		margin: auto;
 		padding: 5%;
@@ -281,6 +281,8 @@
 		margin: 10px 0;
 		border: 1px;
 		padding: 1px;
+		z-index: 2;
+		position: relative;
 	}
 	#mapBtn {
 		box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);

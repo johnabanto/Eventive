@@ -24,13 +24,13 @@
 		<div class="row row-flex row-flex-wrap">
 			<div class="col-md-6">
 				<div class="well clearfix">
-					<h2><label id="profileName">{{vm.name}}'s</label> Page</h2>
-						<!-- profile picture image box -->
+					<!-- profile picture image box -->
+					<h3><label id="profileName">{{vm.name}}'s</label>Page</h3>
 					<form id="form1">
 						<img id="myImg" height="230" width="230" ng-src="https://appventful.herokuapp.com/api/files/{{vm.id}}" onerror="this.src='https://appventful.herokuapp.com/api/files'" alt="your image" />
 
-						<button class="button" ngf-select="upload($file, vm.id)">Upload on file select</button>
 					</form>
+						<button class="button" ngf-select="upload($file, vm.id)">Upload on file select</button>
 				</div>
 			</div>
 
@@ -50,7 +50,7 @@
 			<div class="col-md-12">
 				<div class="well">
 					<table class="table" id="pevents_table">
-						<thead><label class="headings">UPCOMING EVENTS</label></thead>
+						<thead><label class="headings"><h2>UPCOMING EVENTS</h2></label></thead>
 						<tr class="border_bottom">
 							<th>NAME</th>
 							<th>ADDRESS</th>

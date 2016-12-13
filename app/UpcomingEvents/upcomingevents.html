@@ -2,59 +2,58 @@
 
 <style>
 	body {
-		background-image: url("../app/styles/pictures/laptop2.jpg");
-		background-repeat: no-repeat;
-		background-attachment: fixed;
-		background-size: cover;
-		background-position: center;
+		background-color:#282E34;
 	}
-	@media screen and (max-width: 991px) {
-		body{
-			background-image: url("../app/styles/pictures/lvlaptop.jpeg");
-			background-repeat: no-repeat;
-			background-attachment: fixed;
-			background-size: cover;
-			background-position: center;	
-		}
+	/*parallax scrolling*/
+	.bgimg-1, .bgimg-2, .bgimg-3 {
+		position: relative;
+		opacity: 0.7;
+		background-attachment: fixed;	
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	.bgimg-1 {
+		background-image: url("../app/styles/pictures/laptop2.jpg");
+		min-height: 400px;
 	}
 </style>
 
 <div style="position:relative;">
 	<div style="background-color:#282E34;text-align:center;padding:50px 80px;">
 		<span class="eventive" style="text-align:center;letter-spacing: 10px;">MAP</span>
-	</div>
-</div>
-
-<!-- google map view -->	
-<div class="animated fadeIn" id="googlemap">
-	<div class="col-md-10 col-md-offset-1">
-		<div class="well clearfix">
-			<ui-gmap-google-map center='vm.map.center' 
-										zoom='vm.map.zoom'
-										dragging='false'
-										>
-				<div ng-repeat="event in vm.events">					
-					<ui-gmap-marker coords='{ latitude: event.lat, longitude: event.long}' idKey='event._id' options='{clickable: ture}'>
-						<ui-gmap-window 
-							show='false'
-							isIconVisibleOnClick='true'>
-							<p>{{event.eventname}}: {{event.address}}</p>
-						</ui-gmap-window>
-					</ui-gmap-marker>
-				</div>	
-			</ui-gmap-google-map>
+		<!-- google map view -->	
+		<div class="animated fadeIn" id="googlemap">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="well clearfix">
+					<ui-gmap-google-map center='vm.map.center' 
+												zoom='vm.map.zoom'
+												dragging='false'
+												>
+						<div ng-repeat="event in vm.events">					
+							<ui-gmap-marker coords='{ latitude: event.lat, longitude: event.long}' idKey='event._id' options='{clickable: ture}'>
+								<ui-gmap-window 
+									show='false'
+									isIconVisibleOnClick='true'>
+									<p>{{event.eventname}}: {{event.address}}</p>
+								</ui-gmap-window>
+							</ui-gmap-marker>
+						</div>	
+					</ui-gmap-google-map>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="bgimg-2">
+<div class="bgimg-1">
 	<div class="caption">
-		<span class="border" style="background-color:transparent;"></span>
 	</div>
 </div>
 
 <div style="position:relative;">
-	<div style="color:black;background-color:#282E34;text-align:center;padding:50px 80px;text-align:justify;">
+	<div style="color:black;background-color:#282E34;text-align:center;padding:50px 80px;">
+		<span class="eventive" style="text-align:center;letter-spacing: 10px;">EVENT LIST</span>
 	    <div class="container" id="ueventsContainer">
 			<div class="container">
 				<div class="row row-flex row-flex-wrap animated fadeIn" ng-repeat="event in vm.events">
@@ -75,5 +74,10 @@
 				</div>
 			</div> <!--  closes containter -->
 		</div> <!-- closes ueventsContainer -->
+	</div>
+</div>
+<div class="bgimg-1">
+	<div class="caption">
+		<span class="border" style="background-color:transparent;font-weight:bold;font-size:50px;color:#ee61e2;">CREATE A PROFILE TO JOIN</span>
 	</div>
 </div>
