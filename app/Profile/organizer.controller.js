@@ -5,12 +5,13 @@
         .module('app')
         .controller('organizerController', organizerController);
 
-    organizerController.$inject = ['toastr', 'storageFactory', 'EventsFactory', '$state', '$stateParams'];
+    organizerController.$inject = ['toastr', 'storageFactory', 'EventsFactory', '$state', '$stateParams', 'Upload', '$scope', 'wineServer', 'imageFactory'];
     
     /* @ngInject */
-    function organizerController(toastr, storageFactory, EventsFactory, $state, $stateParams) {
+    function organizerController(toastr, storageFactory, EventsFactory, $state, $stateParams, Upload, $scope, wineServer, imageFactory) {
         var vm = this;
         vm.title = 'organizerController';
+        vm.editor = 'static';
         activate();
         
 
@@ -98,6 +99,40 @@
                 function(error) {
                     toastr.error("Error sending messages: " + error);
                 }) 
+        }
+
+        $scope.upload = function(file, userId) {
+            Upload.upload({
+                url: wineServer + 'files',
+                data: {"filefield": file, "userId": userId}
+            }).then(function(response) {
+                console.log(response);
+                $state.reload();
+            },
+            function(error) {
+                toastr.error("Problem uploading photo")
+            })
+        }
+
+        function setStorage(key, value) {
+            storageFactory.setLocalStorage(key, value)
+                console.log("User info successfully stored");
+                return;
+        }
+
+        vm.editProfile = function(userId, token, name, email, number) {
+            imageFactory.editProfile(userId, token, name, email, number).then(
+                function(response) {
+                    console.log(response);
+                    setStorage('userInfo', response);
+                    vm.name = response.name;
+                    vm.email = response.email;
+                    vm.number = response.number;
+                    $state.reload();
+                }, 
+                function(error) {
+                    toastr.error("There was a problem submitting the edit");
+                })
         }
     }
 })();

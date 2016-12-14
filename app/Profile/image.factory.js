@@ -8,7 +8,8 @@
     function imageFactory($http, $q, wineServer, Upload) {
         var service = {
             getImage: getImage,
-            postImage: postImage
+            postImage: postImage,
+            editProfile: editProfile
         };
         return service;
         ////////////////
@@ -56,6 +57,36 @@
         	});
         	return defer.promise;
         	}
+        }
+
+        function editProfile(userId, token, name, email, number) {
+            var defer = $q.defer();
+
+            $http({
+                method: 'PUT',
+                url: wineServer + 'profile/' + userId,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                data: {
+                    "name": name,
+                    "email": email,
+                    "number": number
+                }
+            })
+            .then(function(response){
+                if (typeof response.data === 'object'){
+                    defer.resolve(response.data);
+                } else {
+                    defer.reject(response);
+                }
+            }, 
+            function(error) {
+                defer.reject(error);
+            });
+
+            return defer.promise;
         }
     }
 })();

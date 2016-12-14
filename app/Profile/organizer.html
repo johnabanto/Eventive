@@ -26,8 +26,9 @@
 				<!-- image upload -->
 				<div class="well">
 					<form align="center">
-						<img id="myImg" src="../app/styles/pictures/Eventive4.png"></img>
-						<input type='file' accept="image/*"></input>
+						<img id="myImg" height="230" width="230" ng-src="https://appventful.herokuapp.com/api/files/{{vm.id}}" onerror="this.src='https://appventful.herokuapp.com/api/files'" alt="your image" />
+
+						<button class="button" ngf-select="upload($file, vm.id)">Upload on file select</button>
 					</form>
 				</div>
 			</div>
@@ -35,13 +36,24 @@
 			<div class="col-md-6">
 				<div class="well clearfix">
 					<h2>PROFILE INFORMATION</h2>
-					<ul id="proInfo">
-						<li><p><label class="headings">NAME:</label> {{vm.name}}</p></li>
-						<li><p><label class="headings">EMAIL:</label> {{vm.email}}</p></li>
-						<li><p><label class="headings">PHONE NUMBER:</label> {{vm.number}}</p></li>
+					<div ng-switch="vm.editor">
+						<ul id="proInfo" ng-switch-when="static">
+							<li><p><label class="headings">NAME:</label> {{vm.name}}</p></li>
+							<li><p><label class="headings">EMAIL:</label> {{vm.email}}</p></li>
+							<li><p><label class="headings">PHONE NUMBER:</label> {{vm.number}}</p></li>
 						<!-- edit profile button -->
-						<button type="button" class="btn btn-info" id="editBtn" style="float: right">Edit</button>
-					</ul>
+							<button type="button" class="btn btn-info" id="editBtn" style="float: right" ng-click="vm.editor = 'editor'">Edit</button>
+						</ul>
+						<ul id="proInfo" ng-switch-when="editor">
+							<li><p><label class="headings">NAME:</label> <input type="text" ng-model="vm.name"></p></li>
+							<li><p><label class="headings">EMAIL:</label> <input type="text" ng-model="vm.email"></p></li>
+							<li><p><label class="headings">PHONE NUMBER:</label> <input type="text" ng-model="vm.number"></p></li>
+						<!-- edit profile button -->
+							<button type="button" class="btn btn-info" id="editBtn" style="float: right" 
+								ng-click="vm.editProfile(vm.id, vm.token, vm.name, vm.email, vm.number);
+								$state.reload();" >Submit</button>
+						</ul>
+					</div>
 				</div>
 			</div>
 
