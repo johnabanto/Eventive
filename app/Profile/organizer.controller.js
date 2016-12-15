@@ -12,6 +12,8 @@
         var vm = this;
         vm.title = 'organizerController';
         vm.editor = 'static';
+        vm.date = new Date();
+
         activate();
         
 
@@ -90,8 +92,8 @@
                 })
         }
 
-        vm.sendMessage = function(eventId, eventName, eventAddress, eventAttendees, token) {
-            EventsFactory.sendMessage(eventId, eventName, eventAddress, eventAttendees, token).then(
+        vm.sendMessage = function(eventId, eventName, eventAddress, eventAttendees, token, date) {
+            EventsFactory.sendMessage(eventId, eventName, eventAddress, eventAttendees, token, date).then(
                 function(response) {
                     console.log(response);
                     toastr.success("Messages sent!");

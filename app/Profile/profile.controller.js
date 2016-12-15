@@ -11,6 +11,7 @@
     function profileController(toastr, storageFactory, EventsFactory, $state, $stateParams, imageFactory, Upload, $scope, wineServer) {
         var vm = this;
         vm.title = 'profileController';
+        vm.editor = 'static';
  
         activate();
 
@@ -22,7 +23,7 @@
             vm.number = storageFactory.getLocalStorage('userInfo').number;
             vm.name = storageFactory.getLocalStorage('userInfo').name;
             vm.id = storageFactory.getLocalStorage('userInfo')._id;
-            vm.token = storageFactory.getLocalStorage('token');
+            vm.token = storageFactory.getLocalStorage('token');           
 
             EventsFactory.getEventsByProfile(vm.id, vm.token).then(
                 function(response) {
@@ -68,6 +69,37 @@
             })
         }
 
+        function setStorage(key, value) {
+            storageFactory.setLocalStorage(key, value)
+                console.log("User info successfully stored");
+                return;
+        }
+
+        vm.editProfile = function(userId, token, name, email, number) {
+            imageFactory.editProfile(userId, token, name, email, number).then(
+                function(response) {
+                    console.log(response);
+                    setStorage('userInfo', response);
+                    vm.name = response.name;
+                    vm.email = response.email;
+                    vm.number = response.number;
+                    $state.reload();
+                }, 
+                function(error) {
+                    toastr.error("There was a problem submitting the edit");
+                })
+        }
+
+        vm.sendUserReminder = function(eventId, eventName, address, date) {
+            console.log("This is working")
+            EventsFactory.sendUserMessage(vm.name, vm.number, eventName, address, date, vm.token, eventId).then(
+                function(response) {
+                    console.log(response);
+                }, 
+                function(error) {
+                    toastr.error(error);
+                });
+        }
         
     }
 

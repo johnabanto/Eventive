@@ -8,7 +8,8 @@
     function storageFactory(localStorageService) {
         var service = {
             setLocalStorage: setLocalStorage, 
-            getLocalStorage: getLocalStorage
+            getLocalStorage: getLocalStorage,
+            clearAllLocalStorage: clearAllLocalStorage
         };
         return service;
         ////////////////
@@ -18,6 +19,10 @@
 
         function getLocalStorage(key, value) {
         	return localStorageService.get(key);
+        }
+
+        function clearAllLocalStorage() {
+            return localStorageService.clearAll();
         }
     }
 })();

@@ -1,9 +1,7 @@
-
 // converts nav bar buttons to drop down menu view
 $('.handle').on('click', function(){
 	$('nav ul').toggleClass('showing');
 })
-
 
 // about us page slideshow 
 var slideIndex = 1;
@@ -32,3 +30,7 @@ function showSlides(n) {
 	slides[slideIndex-1].style.display = "block"; 
 	dots[slideIndex-1].className += " active";
 };
+
+
+// animate css 
+$('#yourElement').animateCss('fadeInLeft');

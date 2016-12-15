@@ -17,6 +17,10 @@
 		background-image: url("../app/styles/pictures/laptop2.jpg");
 		min-height: 400px;
 	}
+	.bgimg-2 {
+		background-image: url("../app/styles/pictures/meeting1.jpg");
+		min-height: 400px;
+	}
 </style>
 
 <div style="position:relative;">
@@ -46,7 +50,7 @@
 	</div>
 </div>
 
-<div class="bgimg-1">
+<div class="bgimg-2">
 	<div class="caption">
 	</div>
 </div>
@@ -61,7 +65,10 @@
 					<div class="col-md-10 col-md-offset-0">
 						<div class="well clearfix">
 							<h3 id="eventTitle">{{event.eventname}}</h3>
-							<button type="button" class="btn btn-info btn-lg btn-block" ng-click="vm.addToEvent(event._id)" id="mapBtn">Sign Up Now!</button>
+							<div ng-switch="vm.alreadyInEvent(vm.id, event.attendees)">
+								<button type="button" class="btn btn-info btn-lg btn-block" ng-click="vm.addToEvent(event._id)" id="mapBtn" ng-switch-default >Sign Up Now!</button>
+								<button type="button" class="btn btn-info btn-lg btn-block" ng-click="vm.sendUserReminder(event._id, event.eventname, event.address, event.datetime)" id="mapBtn" ng-switch-when="1">Send Reminder</button>
+							</div>
 								<ul id="uevents_box">
 									<li><p><b>Company Name:</b> {{event.companyname}}</p></li>
 									<li><p><b>Address:</b> {{event.address}}</p></li>

@@ -5,15 +5,15 @@
         .module('app')
         .controller('loginController', loginController);
 
-    loginController.$inject = ['toastr', 'AuthFactory', '$q', '$state', 'storageFactory', 'localStorageService'];
+    loginController.$inject = ['toastr', 'AuthFactory', '$q', '$state', 'storageFactory', 'localStorageService', '$rootScope'];
     
     /* @ngInject */
-    function loginController(toastr, AuthFactory, $q, $state, storageFactory, localStorageService) {
+    function loginController(toastr, AuthFactory, $q, $state, storageFactory, localStorageService, $rootScope) {
         var vm = this;
         vm.title = 'loginController';
         var token;
         activate();
-
+        $rootScope.id;
         ////////////////
 
         function activate() {
@@ -47,6 +47,7 @@
 
                             setStorage('userInfo', response);
                             setStorage('token', token);
+                            location.reload();
                             if (response.role === "attendee") $state.go("profile");
                             else $state.go("organizer");
                         });

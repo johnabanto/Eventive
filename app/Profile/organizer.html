@@ -8,6 +8,13 @@
 		background-size: cover;
 		background-position: center;
 	}
+	
+	textarea {
+		height: 5em;
+	}
+
+
+
 	@media screen and (max-width: 991px) {
 		body{
 			background-image: url("../app/styles/pictures/lvlaptop.jpeg");
@@ -16,26 +23,31 @@
 			background-size: cover;	
 			background-position: center;
 		}
+
+		textarea {
+			height: 5em;
+		}
 	}
 </style>
 
-<div class="container" id="loginBox">
+<div class="container" id="loginBox" ng-cloak>
 	<div class="container">
 		<div class="row row-flex row-flex-wrap">
 			<div class="col-md-6">
 				<!-- image upload -->
-				<div class="well">
-					<form align="center">
+				<div class="well clearfix">
+					<!-- profile picture image box -->
+					<h3><label id="profileName">{{vm.name}}'s</label> Page</h3>
+					<form id="form1">
 						<img id="myImg" height="230" width="230" ng-src="https://appventful.herokuapp.com/api/files/{{vm.id}}" onerror="this.src='https://appventful.herokuapp.com/api/files'" alt="your image" />
-
-						<button class="button" ngf-select="upload($file, vm.id)">Upload on file select</button>
 					</form>
+						<button class="button" ngf-select="upload($file, vm.id)">Upload on file select</button>
 				</div>
 			</div>
 			<!-- profile information -->
 			<div class="col-md-6">
 				<div class="well clearfix">
-					<h2>PROFILE INFORMATION</h2>
+					<h2>ORGANIZER INFORMATION</h2>
 					<div ng-switch="vm.editor">
 						<ul id="proInfo" ng-switch-when="static">
 							<li><p><label class="headings">NAME:</label> {{vm.name}}</p></li>
@@ -45,9 +57,9 @@
 							<button type="button" class="btn btn-info" id="editBtn" style="float: right" ng-click="vm.editor = 'editor'">Edit</button>
 						</ul>
 						<ul id="proInfo" ng-switch-when="editor">
-							<li><p><label class="headings">NAME:</label> <input type="text" ng-model="vm.name"></p></li>
-							<li><p><label class="headings">EMAIL:</label> <input type="text" ng-model="vm.email"></p></li>
-							<li><p><label class="headings">PHONE NUMBER:</label> <input type="text" ng-model="vm.number"></p></li>
+							<li><p><label class="headings">NAME:</label><input type="text" ng-model="vm.name"></p></li>
+							<li><p><label class="headings">EMAIL:</label><input type="text" ng-model="vm.email"></p></li>
+							<li><p><label class="headings">PHONE NUMBER:</label><input type="text" ng-model="vm.number"></p></li>
 						<!-- edit profile button -->
 							<button type="button" class="btn btn-info" id="editBtn" style="float: right" 
 								ng-click="vm.editProfile(vm.id, vm.token, vm.name, vm.email, vm.number);
@@ -57,21 +69,36 @@
 				</div>
 			</div>
 
-			<div class="col-md-12">
+			<div class="col-md-12" >
 				<div class="well clearfix">
-					<table class="table" id="pevents_table">
+					<table class="table" id="pevents_table" ng-hide="vm.events.length === 0">
 						<thead><h2 style="text-align: left">UPCOMING EVENTS</label></thead>
 						<tr>
 							<th>NAME</th>
 							<th>ADDRESS</th>
+							<th>ATTENDEES</th>
 							<th>DATE</th>
 							<th>UPDATE</th>
 							<th>NOTIFICATION</th>
 						</tr>
 						<!-- upcoming events to be setup in ng-repeat to populte events -->
-						<tr ng-repeat="event in vm.events">
+						<tr ng-repeat="event in vm.events" ng-init="tooltip=false">
 							<td>{{event.eventname}}</td>
 							<td>{{event.address}}</td>
+							<td ng-mouseover="tooltip=true" ng-mouseleave="tooltip=false">
+								{{event.attendees.length}}
+								<div class="tooltip" ng-show="tooltip">
+								<div class="tooltip" ng-show="tooltip">Hi..Welcome to Angular JS World.</div>
+								<span>
+									<table>
+										<tr ng-repeat="attendee in event.attendees.length">
+											<td>{{attendee.attendeename}}</td>
+											<td><button>Check In</button></td>
+										</tr>
+									</table>
+								</span>
+								</div>
+							</td>
 							<td>{{event.datetime | date:'EEEE, MMMM d, y h:mm a' }}</td>
 							<!-- remove upcoming event button -->
 							<td><button type="button" class="btn btn-info" id="btn-sm" ng-click="vm.deleteEvent(event._id, vm.token)">Remove</button>
@@ -82,7 +109,7 @@
 													vm.eventId=event._id"
 													ng-model="edit" id="btn-sm">Edit</button>
 							</td>
-							<td><button ng-click="vm.sendMessage(event._id, event.eventname, event.eventaddress, event.attendees, vm.token)" class="btn btn-info" id="btn-sm">Send Reminder</button></td>
+							<td><button ng-click="vm.sendMessage(event._id, event.eventname, event.eventaddress, event.attendees, vm.token, event.datetime)" class="btn btn-info" id="btn-sm">Send Reminder</button></td>
 						</tr>
 					</table>
 				</div>
@@ -101,26 +128,30 @@
 						<input type="text" placeholder="Add an address" ng-model="vm.address">
 					</div>
 
-					<div>
-						<button ng-click="vm.postNewEvent(vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description)" class="btn btn-info" id="eventBtn1">Submit New Event</button>
-						<button ng-click="vm.editEvent(vm.eventId, vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description)" class="btn btn-info" id="eventBtn2">Edit Event</button>
+					<div class="form-group" id="detailsInput">
+						<label class="headings">DETAILS</label>
+						<textarea type="text" placeholder="Add a description for the event" ng-model="vm.description"></textarea>
 					</div>
+
+					
 				</div>
 			</div>
 				
 			<div class="col-md-6">
 				<div class="well clearfix">
 					<div class="form-group">
-						<h2>SELECT WHEN AND WHERE</h2>
-						<label class="headings">DATE AND TIME</label>
+						<h2>WHEN WILL IT BE</h2>
+						<label class="headings" style="margin-bottom: 20px;">DATE AND TIME</label>
 						<datetimepicker data-ng-model="vm.date" class="col-md-6" id="date"></datetimepicker>
-						<p>Selected Date: {{ vm.date | date:'EEEE, MMMM d, y h:mm a' }}</p>
-						<label class="headings">DETAILS</label>
-						<input type="text" placeholder="Add a description for the event" ng-model="vm.description">
+						<p>{{ vm.date | date:'EEEE, MMMM d, y h:mm a' }}</p>
+					</div>
+					<div>
+						<button ng-click="vm.postNewEvent(vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description)" class="btn btn-info" id="eventBtn1">Submit New Event</button>
+						<button ng-click="vm.editEvent(vm.eventId, vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description)" class="btn btn-info" id="eventBtn2">Edit Event</button>
 					</div>
 				</div>
 			</div>
-
+		
 				</div>
 			</div>
 		</div> <!-- /row -->
