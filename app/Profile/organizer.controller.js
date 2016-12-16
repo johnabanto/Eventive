@@ -5,21 +5,24 @@
         .module('app')
         .controller('organizerController', organizerController);
 
-    organizerController.$inject = ['toastr', 'storageFactory', 'EventsFactory', '$state', '$stateParams', 'Upload', '$scope', 'wineServer', 'imageFactory'];
+    organizerController.$inject = ['toastr', 'storageFactory', 'EventsFactory', '$state', '$stateParams', 'Upload', '$scope', 'wineServer', 'imageFactory', '$location', '$anchorScroll'];
     
     /* @ngInject */
-    function organizerController(toastr, storageFactory, EventsFactory, $state, $stateParams, Upload, $scope, wineServer, imageFactory) {
+    function organizerController(toastr, storageFactory, EventsFactory, $state, $stateParams, Upload, $scope, wineServer, imageFactory, $location, $anchorScroll) {
         var vm = this;
         vm.title = 'organizerController';
         vm.editor = 'static';
         vm.date = new Date();
-
+        vm.date2 = new Date();
+        vm.levels = ['NOVICE', 'INTERMEDIATE', 'ADVANCED', 'REMBRANDT'];
+        vm.editUpcomingEvent = false;
         activate();
         
 
         ////////////////
 
         function activate() {
+            if (storageFactory.getLocalStorage('userInfo').role == "attendee") $state.go('profile');
         	vm.email = storageFactory.getLocalStorage('userInfo').email;
             vm.password = storageFactory.getLocalStorage('userInfo').password;
             vm.number = storageFactory.getLocalStorage('userInfo').number;
@@ -37,14 +40,19 @@
                 })
         }
 
-        vm.postNewEvent = function(eventName, companyName, companyid, datetime, address, token, long, lat, description) {
+        $scope.goToEditor = function() {
+            $location.hash('editor');
+            $anchorScroll;
+        }
 
+        vm.postNewEvent = function(eventName, companyName, companyid, datetime, address, token, long, lat, description, diff) {
+            console.log(diff);
             EventsFactory.getCoordFromAddress(address).then(
                 function(response) {
                     vm.long = response.results[0].geometry.location.lng;
                     vm.lat = response.results[0].geometry.location.lat;
 
-                    EventsFactory.addEvent(eventName, companyName, companyid, datetime, address, token, vm.long, vm.lat, description).then(
+                    EventsFactory.addEvent(eventName, companyName, companyid, datetime, address, token, vm.long, vm.lat, description, diff).then(
                         function(response) {
                             console.log(response);
                             $state.reload();
@@ -70,15 +78,14 @@
                 });
         }
 
-        vm.editEvent = function(eventId, eventName, companyName, companyid, datetime, address, token, long, lat, description) {
+        vm.editEvent = function(eventId, eventName, companyName, companyid, datetime, address, token, long, lat, description, diff) {
             
             EventsFactory.getCoordFromAddress(address).then(
                 function(response) {
-                    console.log("no problem yet")
-                    //vm.long = response.result[0].geometry.location.lng;
-                    //vm.lat = response.result[0].geometry.location.lat;
-                    console.log(vm.lat);
-                    EventsFactory.editEvent(eventId, eventName, companyName, companyid, datetime, address, token, long, lat, description).then(
+                    console.log(response);
+                    vm.long = response.results[0].geometry.location.lng;
+                    vm.lat = response.results[0].geometry.location.lat;
+                    EventsFactory.editEvent(eventId, eventName, companyName, companyid, datetime, address, token, vm.long, vm.lat, description, diff).then(
                         function(response) {
                             console.log(response);
                             $state.reload();
@@ -116,6 +123,21 @@
             })
         }
 
+        $scope.uploadPainting = function(file, eventId) {
+            Upload.upload({
+                url: wineServer + 'files/' + eventId + '/painting', 
+                data: {
+                    "filefield": file
+                }
+            }).then(function(response) {
+                console.log(response);
+                $state.reload();
+            },
+            function(error) {
+                toastr.error("Problem uploading photo")
+            })
+        }
+
         function setStorage(key, value) {
             storageFactory.setLocalStorage(key, value)
                 console.log("User info successfully stored");
@@ -136,5 +158,6 @@
                     toastr.error("There was a problem submitting the edit");
                 })
         }
+
     }
 })();

@@ -30,19 +30,18 @@
 	}
 </style>
 
-<div class="container" id="loginBox" ng-cloak>
+<div class="container" id="loginBox">
 	<div class="container">
 		<div class="row row-flex row-flex-wrap">
 			<div class="col-md-6">
 				<!-- image upload -->
-				<div class="well clearfix">
-					<!-- profile picture image box -->
-					<h3><label id="profileName">{{vm.name}}'s</label> Page</h3>
-					<form id="form1">
-						<img id="myImg" height="230" width="230" ng-src="https://appventful.herokuapp.com/api/files/{{vm.id}}" onerror="this.src='https://appventful.herokuapp.com/api/files'" alt="your image" />
-					</form>
-						<button class="button" ngf-select="upload($file, vm.id)">Upload on file select</button>
+				<div class="well">
+					<h2 style="margin:0;padding:0;"><span style="color:black;">{{vm.name}}'s</span> PAGE</h2>
 				</div>
+				<form>
+				<!-- profile picture image box -->
+					<img id="myImg" height="250" width="250" ng-src="https://appventful.herokuapp.com/api/files/{{vm.id}}" onerror="this.src='https://appventful.herokuapp.com/api/files'" alt="your image" ngf-select="upload($file, vm.id)" placeholder="Add a profile picture"/>
+				</form>
 			</div>
 			<!-- profile information -->
 			<div class="col-md-6">
@@ -72,14 +71,14 @@
 			<div class="col-md-12" >
 				<div class="well clearfix">
 					<table class="table" id="pevents_table" ng-hide="vm.events.length === 0">
-						<thead><h2 style="text-align: left">UPCOMING EVENTS</label></thead>
+						<a ui-sref="upcomingevents"><thead><label class="headings"><h2><span id="profileEvent">UPCOMING EVENTS</span></h2></label></thead></a>
 						<tr>
 							<th>NAME</th>
 							<th>ADDRESS</th>
 							<th>ATTENDEES</th>
 							<th>DATE</th>
-							<th>UPDATE</th>
-							<th>NOTIFICATION</th>
+							<th>PAINTING</th>
+							<th>ACTIONS</th>
 						</tr>
 						<!-- upcoming events to be setup in ng-repeat to populte events -->
 						<tr ng-repeat="event in vm.events" ng-init="tooltip=false">
@@ -101,15 +100,23 @@
 							</td>
 							<td>{{event.datetime | date:'EEEE, MMMM d, y h:mm a' }}</td>
 							<!-- remove upcoming event button -->
-							<td><button type="button" class="btn btn-info" id="btn-sm" ng-click="vm.deleteEvent(event._id, vm.token)">Remove</button>
+							<td>
+								<img id="myPainting" height="150" width="150" ng-src="https://appventful.herokuapp.com/api/files/{{event._id}}/painting" onerror="this.src='https://appventful.herokuapp.com/api/files/5853591c2417be00118bb47e/painting'" alt="painting" ngf-select="uploadPainting($file, event._id)" placeholder="Add a profile picture"/>
+							</td>
+							<td>
+								<button type="button" class="btn btn-info" id="btn-sm" ng-click="vm.deleteEvent(event._id, vm.token)">Remove</button>
 								<button type="button" class="btn btn-info" ng-click="vm.eventName=event.eventname;
 													vm.address=event.address;
 													vm.date=event.datetime;
 													vm.description=event.description;
-													vm.eventId=event._id"
+													vm.eventId=event._id;
+													vm.difficulty=event.difficulty;
+													vm.editUpcomingEvent=true;
+													goToEditor();"
 													ng-model="edit" id="btn-sm">Edit</button>
+								
+								<button ng-click="vm.sendMessage(event._id, event.eventname, event.eventaddress, event.attendees, vm.token, event.datetime)" class="btn btn-info" id="btn-sm">Send Reminder</button>
 							</td>
-							<td><button ng-click="vm.sendMessage(event._id, event.eventname, event.eventaddress, event.attendees, vm.token, event.datetime)" class="btn btn-info" id="btn-sm">Send Reminder</button></td>
 						</tr>
 					</table>
 				</div>
@@ -133,25 +140,35 @@
 						<textarea type="text" placeholder="Add a description for the event" ng-model="vm.description"></textarea>
 					</div>
 
-					
+					<div class="form-group" id="difficultyInput">
+						<label class="headings">DIFFICULTY</label>
+						<select ng-model="vm.difficulty" placeholder="Select a difficulty" >
+							<option ng-repeat="level in vm.levels"  value="{{level}}">{{level}}</option>
+						</select>
+					</div>
 				</div>
 			</div>
 				
-			<div class="col-md-6">
+			<div class="col-md-6" id="editor">
 				<div class="well clearfix">
 					<div class="form-group">
 						<h2>WHEN WILL IT BE</h2>
 						<label class="headings" style="margin-bottom: 20px;">DATE AND TIME</label>
 						<datetimepicker data-ng-model="vm.date" class="col-md-6" id="date"></datetimepicker>
 						<p>{{ vm.date | date:'EEEE, MMMM d, y h:mm a' }}</p>
+						<div ng-switch="vm.editUpcomingEvent">
+							<button ng-click="vm.postNewEvent(vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description, vm.difficulty)" class="btn btn-info" id="eventBtn1" ng-switch-default>Submit New Event</button>
+							<button ng-click="vm.editEvent(vm.eventId, vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description, vm.difficulty)" class="btn btn-info" id="eventBtn1" ng-switch-when="true">Edit Event</button>
+						</div>
+						<button ng-click="vm.eventName='';
+										  vm.address='';
+										  vm.date=vm.date2;
+										  vm.description='';
+										  vm.eventId='';
+										  vm.difficulty='';
+										  vm.editUpcomingEvent=false" 
+								class="btn btn-info" id="eventBtn2">Clear</button>
 					</div>
-					<div>
-						<button ng-click="vm.postNewEvent(vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description)" class="btn btn-info" id="eventBtn1">Submit New Event</button>
-						<button ng-click="vm.editEvent(vm.eventId, vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description)" class="btn btn-info" id="eventBtn2">Edit Event</button>
-					</div>
-				</div>
-			</div>
-		
 				</div>
 			</div>
 		</div> <!-- /row -->

@@ -239,7 +239,7 @@
             return defer.promise;
         }
 
-        function addEvent(eventName, companyName, companyid, datetime, address, token, long, lat, description) {
+        function addEvent(eventName, companyName, companyid, datetime, address, token, long, lat, description, diff) {
 
             console.log(datetime);
             var defer = $q.defer();
@@ -259,7 +259,8 @@
                     'address': address,
                     'long': long,
                     'lat': lat,
-                    'description': description
+                    'description': description,
+                    'difficulty': diff
                 }
             }).then(function(response) {
                 if (typeof response.data === 'object'){
@@ -275,7 +276,7 @@
             return defer.promise;
         }
 
-        function editEvent(eventId, eventName, companyName, companyid, datetime, address, token, long, lat, description) {
+        function editEvent(eventId, eventName, companyName, companyid, datetime, address, token, long, lat, description, diff) {
             var defer = $q.defer();
 
             $http({
@@ -293,7 +294,8 @@
                     'address': address,
                     'long': long,
                     'lat': lat,
-                    'description': description
+                    'description': description,
+                    'difficulty': diff
                 }
             }).then(function(response) {
                 if (typeof response.data === 'object'){

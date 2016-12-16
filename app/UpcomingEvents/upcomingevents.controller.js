@@ -5,10 +5,10 @@
         .module('app')
         .controller('upcomingEventsController', upcomingEventsController);
 
-    upcomingEventsController.$inject = ['toastr', 'EventsFactory', 'storageFactory', '$state'];
+    upcomingEventsController.$inject = ['toastr', 'EventsFactory', 'storageFactory', '$state', '$location', '$anchorScroll', '$rootScope'];
     
     /* @ngInject */
-    function upcomingEventsController(toastr, EventsFactory, storageFactory, $state) {
+    function upcomingEventsController(toastr, EventsFactory, storageFactory, $state, $location, $anchorScroll, $rootScope) {
         var vm = this;
         vm.title = 'upcomingEventsController';
         vm.events;
@@ -40,6 +40,11 @@
 
         }
 
+        $rootScope.goToEvent = function(eventId) {
+            $location.hash(eventId);
+            $anchorScroll();
+        }
+
         vm.alreadyInEvent = function(userId, attendees) {
             if (userId == 0) return "0";
             var len = attendees.length;
@@ -61,7 +66,7 @@
                         console.log(response);
 
                         vm.updatedEvent = response;
-                        $state.reload();
+                        $state.go('profile');
                     })
             } else {
                 console.log("This shouldn't be seen");

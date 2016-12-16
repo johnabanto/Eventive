@@ -1,4 +1,4 @@
-<div ui-view ng-cloak></div>
+<div ui-view></div>
 
 <style>
 	body {
@@ -39,7 +39,7 @@
 								<ui-gmap-window 
 									show='false'
 									isIconVisibleOnClick='true'>
-									<p>{{event.eventname}}: {{event.address}}</p>
+									<a ng-click=goToEvent(event._id)>{{event.eventname}}: {{event.address}}</a>
 								</ui-gmap-window>
 							</ui-gmap-marker>
 						</div>	
@@ -62,20 +62,27 @@
 			<div class="container">
 				<div class="row row-flex row-flex-wrap animated fadeIn" ng-repeat="event in vm.events">
 					<!-- panel of upcoming events for people to see -->
-					<div class="col-md-10 col-md-offset-0">
+					<div class="col-md-10" id="{{event._id}}">
 						<div class="well clearfix">
-							<h3 id="eventTitle">{{event.eventname}}</h3>
-							<div ng-switch="vm.alreadyInEvent(vm.id, event.attendees)">
+								<div class="col-md-5 col-md-offset-0">
+									<h3 id="eventTitle">{{event.eventname}}</h3>
+									<ul id="uevents_box">
+										<li><p><b>Company Name:</b> {{event.companyname}}</p></li>
+										<li><p><b>Address:</b> {{event.address}}</p></li>
+										<li><p><b>Date:</b> {{event.datetime | date : "medium"}}</p></li>
+										<li><p><b>Description:</b> {{event.description}}</p></li>
+										<li><p><b>Difficulty:</b> {{event.difficulty}}</p></li>
+									</ul>
+								</div>
+								<div class="col-md-5 col-md-offset-2">
+									<img src="https://appventful.herokuapp.com/api/files/{{event._id}}/painting" onerror="this.src='https://appventful.herokuapp.com/api/files/5853591c2417be00118bb47e/painting'" id="artThumb" height="350" width="350">
+								</div>
+							<!-- edit profile button -->
+							<div ng-switch="vm.alreadyInEvent(vm.id, event.attendees)" class="col-md-5">
 								<button type="button" class="btn btn-info btn-lg btn-block" ng-click="vm.addToEvent(event._id)" id="mapBtn" ng-switch-default >Sign Up Now!</button>
 								<button type="button" class="btn btn-info btn-lg btn-block" ng-click="vm.sendUserReminder(event._id, event.eventname, event.address, event.datetime)" id="mapBtn" ng-switch-when="1">Send Reminder</button>
 							</div>
-								<ul id="uevents_box">
-									<li><p><b>Company Name:</b> {{event.companyname}}</p></li>
-									<li><p><b>Address:</b> {{event.address}}</p></li>
-									<li><p><b>Date:</b> {{event.datetime | date : "medium"}}</p></li>
-									<li><p><b>Description:</b> {{event.description}}</p></li>
-								</ul>
-							<!-- edit profile button -->
+
 						</div>
 					</div>
 				</div>

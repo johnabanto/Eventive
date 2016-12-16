@@ -23,15 +23,14 @@
 	<div class="container">
 		<div class="row row-flex row-flex-wrap">
 			<div class="col-md-6">
-				<div class="well clearfix">
+				<div class="well">
 					<!-- profile picture image box -->
-					<h3><label id="profileName">{{vm.name}}'s</label>Page</h3>
-					<form id="form1">
-						<img id="myImg" height="230" width="230" ng-src="https://appventful.herokuapp.com/api/files/{{vm.id}}" onerror="this.src='https://appventful.herokuapp.com/api/files'" alt="your image" />
-
-					</form>
-						<button class="button" ngf-select="upload($file, vm.id)">Upload on file select</button>
+					<h2 style="margin:0;padding:0;"><span style="color:black;">{{vm.name}}'s</span> PAGE</h2>
 				</div>
+				<form>
+				<!-- profile picture image box -->
+					<img id="myImg" height="250" width="250" ng-src="https://appventful.herokuapp.com/api/files/{{vm.id}}" onerror="this.src='https://appventful.herokuapp.com/api/files'" alt="your image" ngf-select="upload($file, vm.id)" placeholder="Add a profile picture"/>
+				</form>
 			</div>
 
 			<!-- profile information box -->
@@ -62,8 +61,8 @@
 			<div class="col-md-12">
 				<div class="well">
 					<table class="table" id="pevents_table">
-						<thead><label class="headings"><h2>UPCOMING EVENTS</h2></label></thead>
-						<tr class="border_bottom">
+						<a ui-sref="upcomingevents"><thead><label class="headings"><h2><span id="profileEvent">UPCOMING EVENTS</span></h2></label></thead></a>
+						<tr class="border_bottom" ng-hide="vm.events.length === 0">
 							<th>NAME</th>
 							<th>ADDRESS</th>
 							<th>DATE</th>
