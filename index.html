@@ -2,32 +2,34 @@
 <html lang="en" ng-app="app" ng-cloak>
 <head>
   <meta charset="UTF-8">
-  <title>Wine And Paint</title>
+  <title>EVENTIVE</title>
 <!-- bower:css -->
 <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
 <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
 <!-- endbower -->
-<link rel="stylesheet" href="node_modules/angular-bootstrap-datetimepicker/src/css/datetimepicker.css"/>
 <!-- inject:css -->
 <link rel="stylesheet" href="/app/styles/styles.css">
 <!-- endinject -->
+<!-- Manual install -->
+<link rel="stylesheet" href="node_modules/angular-bootstrap-datetimepicker/src/css/datetimepicker.css"/>
+<!-- End of manual install -->
 </head>
 
 <body>
 	<!-- static top navigation bar -->
-	<header>
+	<header ng-controller="indexController as vm">
 		<nav class="navbar navbar-default navbar-fixed-top row" id="navbar_top">
-			<div class="col-md-2 col-md-offset-1">
-				<img src="../app/styles/pictures/Eventive4.png" id="logo" ui-sref="home">
+			<div class="col-md-2 col-md-offset-1" >
+				<img src="../app/styles/pictures/Eventive4.png" id="logo" ui-sref="profile">
 			</div>
 			<div class="col-md-8">
 				<ul>
-					<a ui-sref="home" id="btn"><li>HOME</li></a>
 					<a ui-sref="aboutus" id="btn"><li>ABOUT US</li></a>
+					<a ui-sref="home" id="btn"><li>HOME</li></a>
 					<a ui-sref="upcomingevents" id="btn"><li>UPCOMING EVENTS</li></a>
-<!-- 					<a ui-sref="gallery" id="btn"><li>GALLERY</li></a> -->
-					<a ui-sref="login" id="btn"><li>SIGN UP</li></a>
+					<a ui-sref="login" id="btn" ng-show='vm.id == "0"'><li>SIGN IN</li></a>
+					<a id="btn" ng-show='vm.id != "0"' ng-click="vm.clearStorage(); vm.id=0;" ui-sref="home"><li>LOG OUT</li></a>
 				</ul>
 				<div class="handle">MENU&nbsp;&nbsp;&nbsp;&#9776;</div>
 			</div>
@@ -43,17 +45,18 @@
 		<div class="navbar navbar-default navbar-fixed-bottom" role="navigation" id="navbar_bot">
 			<div class="container">
 				<div>
-					<h5><b>&#174; JJ STUDIOS</b></h5>
+					<h5><b>&#169; JJ STUDIOS 2016</b></h5>
 				</div>
 			</div>
 		</div>
 	</footer>
+
 <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyBmXju8CHIaQIDu3DJIbrfj2oknuJhnNT4'></script>
 <!-- bower:js -->
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-messages/angular-messages.js"></script>
 <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
-<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+<script src="bower_components/lodash/lodash.js"></script>
 <script src="bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -86,5 +89,7 @@
 <script type="text/javascript" src="node_modules/moment/moment.js"></script>
 <script type="text/javascript" src="node_modules/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
 <script type="text/javascript" src="node_modules/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js"></script>
+<script src="/app/HomePage/navigate.controller.js"></script>
+
 </body>
 </html>

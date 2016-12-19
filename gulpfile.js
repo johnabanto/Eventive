@@ -24,6 +24,7 @@ var paths = ['./bower_components/','./app/*.js','./app/**/*.css'];
 
 gulp.task('injectables', function() {
     var sources = gulp.src(paths, {read: false});
+    console.log("Flag 1");
     return gulp.src('index.html')
         .pipe(wiredep())
         .pipe(inject(sources))
@@ -52,9 +53,18 @@ gulp.task('connect', function() {
     })
 });
 
+gulp.task('liveConnect', function() {
+    connect.server({
+        root: '.',
+        livereload: false
+    })
+});
+
 gulp.task('app', function(){
+    var port = 8080;
+    console.log("gulp port: " + port);
     var options = {
-        uri: 'http://localhost:8080',
+        uri: 'http://localhost:' + port,
         app: 'chrome'
     };
     gulp.src('./index.html')
@@ -69,6 +79,21 @@ gulp.task('start', function () {
   })
 });
 
+gulp.task('serveprod', function() {
+  connect.server({
+    root: './index.html',
+    port: 5000, // localhost:5000
+    livereload: false
+  });
+  console.log(process.env);
+});
+
+gulp.task('connected', function() {
+  connect.server({
+    port: process.env.PORT
+  });
+});
+
 gulp.task('serve', ['connect', 'watch', 'injectables', 'app']);
 
-gulp.task('heroku:production', ['connect', 'start', 'watch', 'injectables']);
+gulp.task('live', ['injectables', 'serveprod']);

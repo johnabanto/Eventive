@@ -44,6 +44,7 @@ module.exports.eventPost = function(req, res) {
 	event.long = req.body.long;
 	event.lat = req.body.lat;
 	event.description = req.body.description;
+	event.difficulty = req.body.difficulty;
 
 	event.save(function(err) {
 		if (err) res.send(err);
@@ -52,6 +53,7 @@ module.exports.eventPost = function(req, res) {
 }
 
 module.exports.editEvent = function(req, res) {
+	console.log(req.body.difficulty);
 	Event.findById(req.params.event_id, function(err, event){
 		event.eventname = req.body.eventname;
 		event.address = req.body.address;
@@ -60,6 +62,7 @@ module.exports.editEvent = function(req, res) {
 		event.long = req.body.long;
 		event.lat = req.body.lat;
 		event.description = req.body.description;
+		event.difficulty = req.body.difficulty;
 
 		event.save(function(err) {
 			if(err) res.send(err);

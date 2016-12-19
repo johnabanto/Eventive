@@ -55,8 +55,8 @@
                 function (error) {
                     toastr.error('Please register an account');
 
-                    vm.email = " ";
-                    vm.password = " ";
+                    vm.email = "";
+                    vm.password = "";
                 })
         }
     }

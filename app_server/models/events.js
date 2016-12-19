@@ -33,6 +33,10 @@ var eventSchema = new mongoose.Schema({
 		type: String,
 		required: false
 	},
+	difficulty: {
+		type: String,
+		required: false
+	},
 	attendees: [{
 		attendeeid: mongoose.Schema.Types.ObjectId,
 		attendeename: String, 
