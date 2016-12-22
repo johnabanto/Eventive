@@ -1,1 +1,1 @@
-Final class project which is a full stack web app for event company that organizes wine and paint events for apartment complexes and/or charity events. 
+Web app to provide an event planning tool for a local wine and paint company. The platform allows them publish events as well as register and notify attendees
