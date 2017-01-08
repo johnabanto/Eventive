@@ -39,6 +39,7 @@ router.delete('/events/:event_id', auth, ctrlEvent.deleteEvent); // only for org
 router.get('/messages', ctrlMessages.testTwilio);
 router.post('/messages/:event_id', auth, ctrlMessages.sendGroupMessages);
 router.post('/messages/:event_id/attendee', auth, ctrlMessages.sendSingleMessage);
+router.post('/messages/:event_id/reminder', auth, ctrlMessages.autoMessage);
 
 // files
 router.post('/files', ctrlFiles.postFile);

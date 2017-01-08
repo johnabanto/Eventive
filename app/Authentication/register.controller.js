@@ -11,6 +11,7 @@
     function registerController(toastr, storageFactory, localStorageService, AuthFactory, $state) {
         var vm = this;
         vm.title = 'registerController';
+        vm.gender = ['Male', 'Female', 'Other']
         var token;
 
         activate();
@@ -39,8 +40,10 @@
 
                             setStorage('userInfo', response);
                             setStorage('token', token);
-                            $state.go("profile");
+
                             location.reload();
+                            location.reload();
+                            $state.go('profile');
                             
                         })
                 },

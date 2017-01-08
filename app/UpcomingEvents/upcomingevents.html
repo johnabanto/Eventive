@@ -72,17 +72,24 @@
 										<li><p><b>Date:</b> {{event.datetime | date : "medium"}}</p></li>
 										<li><p><b>Description:</b> {{event.description}}</p></li>
 										<li><p><b>Difficulty:</b> {{event.difficulty}}</p></li>
+										<li><p><b>Spots Left:</b> {{event.maxcount - event.attendees.length}}</p></li>
 									</ul>
 								</div>
 								<div class="col-md-5 col-md-offset-2">
 									<img src="https://appventful.herokuapp.com/api/files/{{event._id}}/painting" onerror="this.src='https://appventful.herokuapp.com/api/files/5853591c2417be00118bb47e/painting'" id="artThumb" height="350" width="350">
 								</div>
 							<!-- edit profile button -->
-							<div ng-switch="vm.alreadyInEvent(vm.id, event.attendees)" class="col-md-5">
-								<button type="button" class="btn btn-info btn-lg btn-block" ng-click="vm.addToEvent(event._id)" id="mapBtn" ng-switch-default >Sign Up Now!</button>
-								<button type="button" class="btn btn-info btn-lg btn-block" ng-click="vm.sendUserReminder(event._id, event.eventname, event.address, event.datetime)" id="mapBtn" ng-switch-when="1">Send Reminder</button>
+							<div ng-hide="event.maxcount == event.attendees.length">
+								<div ng-switch="vm.alreadyInEvent(vm.id, event.attendees)" class="col-md-5">
+									<button type="button" class="btn btn-info btn-lg btn-block" ng-click="vm.addToEvent(event._id)" id="mapBtn" ng-switch-default >Sign Up Now!</button>
+									<button type="button" class="btn btn-info btn-lg btn-block" ng-click="vm.sendUserReminder(event._id, event.eventname, event.address, event.datetime)" id="mapBtn" ng-switch-when="1">Send Reminder</button>
+								</div>
 							</div>
-
+							<div ng-show="event.maxcount == event.attendees.length">
+								<h3 class="pull-left">
+									Sorry, this event is currently full.
+								</h3>
+							</div>
 						</div>
 					</div>
 				</div>

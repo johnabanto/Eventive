@@ -110,11 +110,12 @@ module.exports.paintingGet = function (req, res) {
 				message: 'File not found'
 			});
  	    }
-		
-		res.writeHead(200, {'Content-Type': files[0].contentType});
+		var i = files.length;
+		console.log(i);
+		res.writeHead(200, {'Content-Type': files[i-1].contentType});
 		
 		var readstream = gfs.createReadStream({
-			  filename: files[0].filename
+			  filename: files[i-1].filename
 		});
  
 	    readstream.on('data', function(data) {

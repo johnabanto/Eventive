@@ -45,6 +45,7 @@ module.exports.eventPost = function(req, res) {
 	event.lat = req.body.lat;
 	event.description = req.body.description;
 	event.difficulty = req.body.difficulty;
+	event.maxcount = req.body.maxcount;
 
 	event.save(function(err) {
 		if (err) res.send(err);
@@ -63,6 +64,7 @@ module.exports.editEvent = function(req, res) {
 		event.lat = req.body.lat;
 		event.description = req.body.description;
 		event.difficulty = req.body.difficulty;
+		event.maxcount = req.body.maxcount;
 
 		event.save(function(err) {
 			if(err) res.send(err);

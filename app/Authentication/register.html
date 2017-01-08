@@ -41,7 +41,12 @@
 						<!-- PHONE NUMBER -->
 						<label class="headings">Phone Number</label>
 						<input type="tel" class="form-control" placeholder="Enter Phone Number" ng-model="vm.number" required><br>
-			
+						
+						<!--<label class="headings">Gender</label>
+						<select ng-model="vm.selectGender" id="" class="form-control" placeholder="Select Your Gender">
+							<option value="">Select Your Gender</option>
+							<option ng-repeat="gender in vm.gender" value='{{gender}}'>{{gender}}</option>
+						</select><br> -->
 						<!-- Submit button to go to profile page -->
 						<button type="button" class="btn btn-info btn-lg" ng-click="vm.register()" id="regBtn">Submit</button>
 					</form>

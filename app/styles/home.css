@@ -1,0 +1,44 @@
+body {		
+	background-color:#282E34;
+}
+/*parallax scrolling*/
+	.bgimg-1, .bgimg-2, .bgimg-3 {
+		position: relative;
+		opacity: 0.7;
+		background-attachment: fixed;	
+		background-position: relative;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	.bgimg-1 {
+		background-image: url("../app/styles/pictures/wine.jpeg");
+		min-height: 450px;
+	}
+	.bgimg-2 {
+		background-image: url("../app/styles/pictures/meeting3.jpg");
+		min-height: 450px;
+	}
+	.bgimg-3 {
+		background-image: url("../app/styles/pictures/paint.jpeg");
+		min-height: 450px;
+	}
+	.bgimg-4 {
+		background-image: url("../app/styles/pictures/girl3.jpeg");
+		min-height: 100%;
+	}
+	.caption {
+		position: absolute;
+		left: 0;
+		top: 40%;
+		width: 100%;
+		text-align: center;
+		color: #000;
+	}
+	.caption span.border {
+		background-color: #111;
+		color: #fff;
+		padding: 0 18px;
+		font-size: 25px;
+		letter-spacing: 10px;
+		text-shadow: 2px 2px #282E34;
+	}

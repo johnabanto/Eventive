@@ -76,7 +76,7 @@
 							<td>{{event.datetime | date:'EEEE, MMMM d, y h:mm a' }}</td>
 							<td><button type="button" class="btn btn-info" id="btn-sm" ng-click="vm.sendUserReminder(event._id, event.eventname, event.address, event.datetime)" id="mapBtn">Send Reminder</button></td>
 							<!-- remove upcoming event button -->
-							<td><button type="button" class="btn btn-info" id="btn-sm" style="float: right" ng-click="vm.removeEvent(event._id)">Remove Event</button></td>
+							<td><button type="button" class="btn btn-info pull-left" id="btn-sm" style="float: right" ng-click="vm.removeEvent(event._id)">Remove Event</button></td>
 						</tr>
 					</table>
 				</div>

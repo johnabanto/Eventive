@@ -1,0 +1,20 @@
+body {
+	background-color:#282E34;
+}
+/*parallax scrolling*/
+.bgimg-1, .bgimg-2, .bgimg-3 {
+	position: relative;
+	opacity: 0.7;
+	background-attachment: fixed;	
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.bgimg-1 {
+	background-image: url("../app/styles/pictures/laptop2.jpg");
+	min-height: 400px;
+}
+.bgimg-2 {
+	background-image: url("../app/styles/pictures/meeting1.jpg");
+	min-height: 400px;
+}

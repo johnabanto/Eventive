@@ -19,9 +19,9 @@
 	        function activate() {
 	        	if ( !storageFactory.getLocalStorage('userInfo') ) {
                 	console.log("User not signed in yet");
-                	vm.id = "0";
+                	$rootScope.id = "0";
             	}
-            	console.log(vm.id);
+            	console.log($rootScope.id);
 	        }
 	        
 	        vm.clearStorage = function() {

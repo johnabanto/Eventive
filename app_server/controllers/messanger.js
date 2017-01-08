@@ -50,3 +50,21 @@ module.exports.sendSingleMessage = function(req, res) {
 		}
 	});
 }
+
+module.exports.autoMessage = function(req, res) {
+	var data = dateFormat(req.body.data, "dddd, mmmm, dS");
+	var time = dataFormat(req.body.data, "h:MM TT");
+	client.sendMessage({
+		to: '+1' + req.body.number,
+		from: '+16193040115',
+		body: "Hi " + req.body.name + '! This is a reminder for ' +  req.body.eventName + ' at ' + req.body.address + " on " + date + " at " + time + "."// body of the SMS message
+	}, 
+	function(err, response) {
+		if(err) res.send(err);
+		else {
+			console.log("It worked");
+			console.log(response.body);
+			res.status(200).json(response.body);
+		}
+	});
+}

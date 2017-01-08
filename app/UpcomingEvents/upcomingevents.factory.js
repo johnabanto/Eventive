@@ -135,12 +135,13 @@
         	return defer.promise;
         }
 
-        function addToEvent(eventId, userId, userName, userNumber, token) {
+        function addToEvent(eventId, userId, userName, userNumber, gender, token) {
             var defer = $q.defer();
             var bodyData = {
                 "attendeeid": userId, 
                 "attendeename": userName, 
                 "attendeenumber": userNumber,
+                "gender": gender,
                 "checkin": false
             }
             console.log(bodyData);
@@ -239,7 +240,7 @@
             return defer.promise;
         }
 
-        function addEvent(eventName, companyName, companyid, datetime, address, token, long, lat, description, diff) {
+        function addEvent(eventName, companyName, companyid, datetime, address, token, long, lat, description, diff, maxCount) {
 
             console.log(datetime);
             var defer = $q.defer();
@@ -260,7 +261,8 @@
                     'long': long,
                     'lat': lat,
                     'description': description,
-                    'difficulty': diff
+                    'difficulty': diff, 
+                    'maxcount': maxCount
                 }
             }).then(function(response) {
                 if (typeof response.data === 'object'){
@@ -276,7 +278,7 @@
             return defer.promise;
         }
 
-        function editEvent(eventId, eventName, companyName, companyid, datetime, address, token, long, lat, description, diff) {
+        function editEvent(eventId, eventName, companyName, companyid, datetime, address, token, long, lat, description, diff, maxCount) {
             var defer = $q.defer();
 
             $http({
@@ -295,7 +297,8 @@
                     'long': long,
                     'lat': lat,
                     'description': description,
-                    'difficulty': diff
+                    'difficulty': diff,
+                    'maxcount': maxCount
                 }
             }).then(function(response) {
                 if (typeof response.data === 'object'){

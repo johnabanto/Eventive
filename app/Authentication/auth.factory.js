@@ -50,7 +50,6 @@
         	function(error) {
         		defer.reject(error);
         	});
-            console.log(defer.promise);
         	return defer.promise;
         }
 

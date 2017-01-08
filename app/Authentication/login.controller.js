@@ -47,6 +47,8 @@
 
                             setStorage('userInfo', response);
                             setStorage('token', token);
+
+                            location.reload();
                             location.reload();
                             if (response.role === "attendee") $state.go("profile");
                             else $state.go("organizer");

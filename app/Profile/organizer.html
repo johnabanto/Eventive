@@ -76,6 +76,7 @@
 							<th>NAME</th>
 							<th>ADDRESS</th>
 							<th>ATTENDEES</th>
+							<th>MAX</th>
 							<th>DATE</th>
 							<th>PAINTING</th>
 							<th>ACTIONS</th>
@@ -98,6 +99,7 @@
 								</span>
 								</div>
 							</td>
+							<td>{{event.maxcount}}</td>
 							<td>{{event.datetime | date:'EEEE, MMMM d, y h:mm a' }}</td>
 							<!-- remove upcoming event button -->
 							<td>
@@ -111,6 +113,7 @@
 													vm.description=event.description;
 													vm.eventId=event._id;
 													vm.difficulty=event.difficulty;
+													vm.maxCount = event.maxcount;
 													vm.editUpcomingEvent=true;
 													goToEditor();"
 													ng-model="edit" id="btn-sm">Edit</button>
@@ -146,6 +149,13 @@
 							<option ng-repeat="level in vm.levels"  value="{{level}}">{{level}}</option>
 						</select>
 					</div>
+
+					<div class="form-group" id="maximum">
+						<label class="headings">Max Number of Attendees</label>
+						<select ng-model="vm.maxCount" placeholder="Select the maximum number of attendees">
+							<option ng-repeat="number in vm.max" value="{{number}}">{{number}}</option>
+						</select>
+					</div>
 				</div>
 			</div>
 				
@@ -157,8 +167,8 @@
 						<datetimepicker data-ng-model="vm.date" class="col-md-6" id="date"></datetimepicker>
 						<p>{{ vm.date | date:'EEEE, MMMM d, y h:mm a' }}</p>
 						<div ng-switch="vm.editUpcomingEvent">
-							<button ng-click="vm.postNewEvent(vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description, vm.difficulty)" class="btn btn-info" id="eventBtn1" ng-switch-default>Submit New Event</button>
-							<button ng-click="vm.editEvent(vm.eventId, vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description, vm.difficulty)" class="btn btn-info" id="eventBtn1" ng-switch-when="true">Edit Event</button>
+							<button ng-click="vm.postNewEvent(vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description, vm.difficulty, vm.maxCount)" class="btn btn-info" id="eventBtn1" ng-switch-default>Submit New Event</button>
+							<button ng-click="vm.editEvent(vm.eventId, vm.eventName, vm.name, vm.id, vm.date, vm.address, vm.token, vm.long, vm.lat, vm.description, vm.difficulty, vm.maxCount)" class="btn btn-info" id="eventBtn1" ng-switch-when="true">Edit Event</button>
 						</div>
 						<button ng-click="vm.eventName='';
 										  vm.address='';

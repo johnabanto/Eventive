@@ -34,6 +34,7 @@
                 vm.id = storageFactory.getLocalStorage('userInfo')._id;
                 vm.name = storageFactory.getLocalStorage('userInfo').name;
                 vm.number = storageFactory.getLocalStorage('userInfo').number;
+                vm.gender = storageFactory.getLocalStorage('userInfo').gender;
                 vm.token = storageFactory.getLocalStorage('token');
                 console.log(vm.token);
             }
@@ -61,7 +62,7 @@
             console.log(eventId);
             if (vm.id == "0") $state.go("login");
             else if (vm.id !== "0"){
-                EventsFactory.addToEvent(eventId, vm.id, vm.name, vm.number, vm.token).then(
+                EventsFactory.addToEvent(eventId, vm.id, vm.name, vm.number, vm.gender, vm.token).then(
                     function(response){
                         console.log(response);
 
