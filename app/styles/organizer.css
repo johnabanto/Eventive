@@ -1,0 +1,27 @@
+	body {
+		background-image: url("../app/styles/pictures/laptop1.jpg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		background-position: center;
+	}
+	
+	textarea {
+		height: 5em;
+	}
+
+
+
+	@media screen and (max-width: 991px) {
+		body{
+			background-image: url("../app/styles/pictures/lvlaptop.jpeg");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;	
+			background-position: center;
+		}
+
+		textarea {
+			height: 5em;
+		}
+	}
